@@ -7,14 +7,11 @@ import React, { useContext } from "react";
 import { globalContext } from "../Layout/Layout";
 
 const Home: React.FC = () => {
-  const { locale } = useContext(globalContext);
-
   // prefetched server-side
   const { data: categories } = useQuery<Category[]>({
-    queryKey: ["categories", { locale }],
+    queryKey: ["categories", { locale: "en" }],
     queryFn: async () => {
-      console.log("1", locale);
-      const r = await axios.get(`/${locale}/api/categories`);
+      const r = await axios.get(`/api/categories`);
       return r.data;
     },
   });

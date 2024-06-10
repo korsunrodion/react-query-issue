@@ -1,5 +1,4 @@
 import config from "@/config/config";
-import { getTranslations } from "next-intl/server";
 import { Category } from "./types";
 
 const mockData: Category[] = [
@@ -66,20 +65,9 @@ const mockData: Category[] = [
 ];
 
 const getCategories = async (): Promise<Category[]> => {
-  const t = await getTranslations("Common");
-
-  const dataFormatted: Category[] = [];
-
-  for (const item of mockData) {
-    dataFormatted.push({
-      ...item,
-      title: t(item.title),
-    });
-  }
-
   return new Promise((resolve) => {
     setTimeout(() => {
-      resolve(dataFormatted);
+      resolve(mockData);
     }, 500);
   });
 };
